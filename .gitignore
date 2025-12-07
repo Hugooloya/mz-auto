@@ -1,0 +1,11 @@
+# GitHub Setup for mz-auto
+
+- [x] Check `gh` CLI authentication status <!-- id: 0 -->
+- [x] Initialize git repository (if not already done) <!-- id: 1 -->
+- [x] Configure git at project root (`mz-auto`) <!-- id: 2 -->
+    - [x] Remove nested `.git` in `frontend`
+    - [x] `git init` in root
+    - [x] Create root `.gitignore`
+    - [x] Commit all changes
+- [ ] Create a new GitHub repository <!-- id: 4 -->
+- [ ] Push local code to remote <!-- id: 3 -->
