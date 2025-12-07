@@ -1,11 +1,33 @@
-# GitHub Setup for mz-auto
+# Dependencies
+node_modules/
 
-- [x] Check `gh` CLI authentication status <!-- id: 0 -->
-- [x] Initialize git repository (if not already done) <!-- id: 1 -->
-- [x] Configure git at project root (`mz-auto`) <!-- id: 2 -->
-    - [x] Remove nested `.git` in `frontend`
-    - [x] `git init` in root
-    - [x] Create root `.gitignore`
-    - [x] Commit all changes
-- [ ] Create a new GitHub repository <!-- id: 4 -->
-- [ ] Push local code to remote <!-- id: 3 -->
+# Build outputs
+dist/
+build/
+out/
+
+# Generated files
+.astro/
+.vercel/
+.netlify/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# IDEs
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
