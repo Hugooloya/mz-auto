@@ -1,0 +1,95 @@
+---
+const services = [
+    {
+        title: "Exterior Detail",
+        description:
+            "Complete exterior wash, clay bar treatment, wheel cleaning, and premium wax application.",
+        icon: "🚗",
+    },
+    {
+        title: "Interior Detail",
+        description:
+            "Deep vacuum, leather cleaning & conditioning, carpet shampooing, and odor removal.",
+        icon: "✨",
+    },
+    {
+        title: "Paint Correction",
+        description:
+            "Multi-stage polishing to remove swirls, scratches, and restore paint depth and shine.",
+        icon: "💎",
+    },
+    {
+        title: "Ceramic Coating",
+        description:
+            "Long-term protection for your vehicle's paint with extreme hydrophobicity and gloss.",
+        icon: "🛡️",
+    },
+];
+---
+
+<section id="services" class="services">
+    <div class="container">
+        <h2>Our Premium Services</h2>
+        <div class="services-grid">
+            {
+                services.map((service) => (
+                    <div class="service-card">
+                        <div class="icon">{service.icon}</div>
+                        <h3>{service.title}</h3>
+                        <p>{service.description}</p>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .services {
+        padding: 5rem 0;
+        background-color: var(--color-bg);
+    }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+    h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: var(--color-text);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+    .service-card {
+        background: #252525;
+        padding: 2.5rem;
+        border-radius: 8px;
+        text-align: center;
+        transition: transform 0.3s;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .service-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--color-accent);
+    }
+    .icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+    }
+    h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--color-text);
+    }
+    p {
+        color: var(--color-text-muted);
+        line-height: 1.6;
+    }
+</style>

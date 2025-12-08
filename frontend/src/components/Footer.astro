@@ -1,0 +1,104 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="logo-mz">MZ</span>
+                <span class="logo-auto">Auto Detail</span>
+                <p>Mastering the art of detailing.</p>
+            </div>
+
+            <div class="footer-contact">
+                <h3>Contact</h3>
+                <p>
+                    <a href="mailto:info@mzautodetail.com"
+                        >info@mzautodetail.com</a>
+                </p>
+                <p><a href="tel:5551234567">(555) 123-4567</a></p>
+            </div>
+
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">Facebook</a>
+                    <a href="#" aria-label="Instagram">Instagram</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; {year} MZ Auto Detail. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<style>
+    footer {
+        background-color: #000;
+        color: #9ca3af;
+        padding: 4rem 0 2rem;
+        margin-top: auto;
+        border-top: 1px solid #333;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 3rem;
+        margin-bottom: 3rem;
+    }
+    .footer-brand .logo-mz {
+        color: var(--color-accent-gold);
+        font-weight: 800;
+        font-size: 1.5rem;
+    }
+    .footer-brand .logo-auto {
+        color: white;
+        font-weight: 800;
+        font-size: 1.5rem;
+    }
+    .footer-brand p {
+        margin-top: 1rem;
+        color: #6b7280;
+    }
+    h3 {
+        color: white;
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .footer-contact a {
+        color: #9ca3af;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    .footer-contact a:hover {
+        color: var(--color-accent);
+    }
+    .social-links {
+        display: flex;
+        gap: 1.5rem;
+    }
+    .social-links a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    .social-links a:hover {
+        color: var(--color-accent);
+    }
+    .footer-bottom {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 1px solid #222;
+        font-size: 0.9rem;
+    }
+</style>
