@@ -1,0 +1,100 @@
+---
+import { sanityClient } from "sanity:client";
+import { urlFor } from "../lib/urlFor";
+
+// Fetch only active promotions
+const promotions = await sanityClient.fetch(`*[_type == "promotion" && isActive == true]`);
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Current Promotions</title>
+        <style>
+            .promotions-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+            .promo-card {
+                margin-bottom: 3rem;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+                background: white;
+            }
+            .promo-image {
+                width: 100%;
+                height: auto;
+                max-height: 500px;
+                object-fit: cover;
+                display: block;
+            }
+            .promo-content {
+                padding: 1.5rem;
+            }
+            .promo-title {
+                margin: 0 0 0.5rem 0;
+                font-size: 1.5rem;
+                color: #333;
+            }
+            .promo-desc {
+                color: #666;
+                margin-bottom: 1rem;
+            }
+            .promo-link {
+                display: inline-block;
+                padding: 0.75rem 1.5rem;
+                background: #000;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 6px;
+                font-weight: bold;
+                transition: background 0.2s;
+            }
+            .promo-link:hover {
+                background: #333;
+            }
+            .empty-state {
+                text-align: center;
+                padding: 4rem;
+                color: #888;
+                background: #f9f9f9;
+                border-radius: 8px;
+            }
+        </style>
+	</head>
+	<body>
+        <div class="promotions-container">
+            <h1>Active Promotions</h1>
+            
+            {promotions.length === 0 ? (
+                <div class="empty-state">
+                    <h2>No active promotions currently running.</h2>
+                    <p>Check back later or enable a campaign in the CMS.</p>
+                </div>
+            ) : (
+                promotions.map((promo) => (
+                    <article class="promo-card">
+                        {promo.heroImage && (
+                            <img 
+                                src={urlFor(promo.heroImage).width(1200).height(500).url()} 
+                                alt={promo.heroImage.alt || promo.title}
+                                class="promo-image"
+                            />
+                        )}
+                        <div class="promo-content">
+                            <h2 class="promo-title">{promo.title}</h2>
+                            {promo.description && <p class="promo-desc">{promo.description}</p>}
+                            {promo.link && (
+                                <a href={promo.link} class="promo-link">View Details</a>
+                            )}
+                        </div>
+                    </article>
+                ))
+            )}
+        </div>
+	</body>
+</html>
