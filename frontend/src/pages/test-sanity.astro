@@ -1,0 +1,28 @@
+---
+import { sanityClient } from "sanity:client";
+
+const promotions = await sanityClient.fetch(`*[_type == "promotion"]`);
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Sanity Connection Test</title>
+	</head>
+	<body>
+		<h1>Sanity Connection Test</h1>
+        <p>Project ID: 7cxh4550</p>
+        <p>Dataset: production</p>
+
+        <h2>Promotions Found: {promotions.length}</h2>
+        <ul>
+            {promotions.map((p) => (
+                <li>{p.title} ({p.isActive ? 'Active' : 'Inactive'})</li>
+            ))}
+        </ul>
+
+        {promotions.length === 0 && <p>No promotions found (this is expected if none are created yet, but confirms connection works).</p>}
+	</body>
+</html>
