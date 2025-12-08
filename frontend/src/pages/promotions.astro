@@ -2,16 +2,29 @@
 import { sanityClient } from "sanity:client";
 import { urlFor } from "../lib/urlFor";
 
+// Define the shape of the Promotion data
+interface Promotion {
+    title: string;
+    description?: string;
+    link?: string;
+    heroImage?: {
+        asset: any;
+        alt?: string;
+    };
+}
+
 // Fetch only active promotions
-const promotions = await sanityClient.fetch(`*[_type == "promotion" && isActive == true]`);
+const promotions = await sanityClient.fetch<Promotion[]>(
+    `*[_type == "promotion" && isActive == true]`,
+);
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<title>Current Promotions</title>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Current Promotions</title>
         <style>
             .promotions-container {
                 max-width: 1200px;
@@ -22,7 +35,7 @@ const promotions = await sanityClient.fetch(`*[_type == "promotion" && isActive 
                 margin-bottom: 3rem;
                 border-radius: 12px;
                 overflow: hidden;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
                 background: white;
             }
             .promo-image {
@@ -65,36 +78,47 @@ const promotions = await sanityClient.fetch(`*[_type == "promotion" && isActive 
                 border-radius: 8px;
             }
         </style>
-	</head>
-	<body>
+    </head>
+    <body>
         <div class="promotions-container">
             <h1>Active Promotions</h1>
-            
-            {promotions.length === 0 ? (
-                <div class="empty-state">
-                    <h2>No active promotions currently running.</h2>
-                    <p>Check back later or enable a campaign in the CMS.</p>
-                </div>
-            ) : (
-                promotions.map((promo) => (
-                    <article class="promo-card">
-                        {promo.heroImage && (
-                            <img 
-                                src={urlFor(promo.heroImage).width(1200).height(500).url()} 
-                                alt={promo.heroImage.alt || promo.title}
-                                class="promo-image"
-                            />
-                        )}
-                        <div class="promo-content">
-                            <h2 class="promo-title">{promo.title}</h2>
-                            {promo.description && <p class="promo-desc">{promo.description}</p>}
-                            {promo.link && (
-                                <a href={promo.link} class="promo-link">View Details</a>
+
+            {
+                promotions.length === 0 ? (
+                    <div class="empty-state">
+                        <h2>No active promotions currently running.</h2>
+                        <p>Check back later or enable a campaign in the CMS.</p>
+                    </div>
+                ) : (
+                    promotions.map((promo) => (
+                        <article class="promo-card">
+                            {promo.heroImage && (
+                                <img
+                                    src={urlFor(promo.heroImage)
+                                        .width(1200)
+                                        .height(500)
+                                        .url()}
+                                    alt={promo.heroImage.alt || promo.title}
+                                    class="promo-image"
+                                />
                             )}
-                        </div>
-                    </article>
-                ))
-            )}
+                            <div class="promo-content">
+                                <h2 class="promo-title">{promo.title}</h2>
+                                {promo.description && (
+                                    <p class="promo-desc">
+                                        {promo.description}
+                                    </p>
+                                )}
+                                {promo.link && (
+                                    <a href={promo.link} class="promo-link">
+                                        View Details
+                                    </a>
+                                )}
+                            </div>
+                        </article>
+                    ))
+                )
+            }
         </div>
-	</body>
+    </body>
 </html>
